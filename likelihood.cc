@@ -31,6 +31,7 @@ int main() {
     }
     fin.close();
 
+    std:cout << prob(daten, 3.11538) << std::endl;
 
     ofstream fout("likelihood.txt");
     for(double i=0; i<6; i+=0.001)
