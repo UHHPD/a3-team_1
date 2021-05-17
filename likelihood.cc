@@ -9,9 +9,9 @@ double poisson(double mu, int k) {
   return P;
 }
 
-long double prob(std::vector<int> daten, double mu)
+double prob(std::vector<int> daten, double mu)
 {
-  long double x=1;
+  double x=1;
   for(int k : daten)
   {
     x*=pow(mu, k)*exp(-mu)/(tgamma(k+1));
@@ -31,28 +31,29 @@ int main() {
     }
     fin.close();
 
+    std:cout << prob(daten, 3.11538) << std::endl;
 
     ofstream fout("likelihood.txt");
-    for(double i=0; i<6; i+=0.001)
+    for(double i=0; i<6; i+=0.1)
     {
       fout << prob(daten, i) << std::endl;
     }
     fout.close();
 
     ofstream gout("nll.txt");
-    for(double i=0; i<6; i+=0.001)
+    for(double i=0; i<6; i+=0.1)
     {
       gout << i << "  " << -2*log(prob(daten, i)) << std::endl; 
     }
     gout.close();
 
     ofstream hout("deltanll.txt");
-    for(double i=0; i<6; i+=0.001)
+    for(double i=0; i<6; i+=0.1)
     {
       hout << i << "  " << -2*log(prob(daten, i)) + 2*log(prob(daten, 3.11538)) << std::endl;
     }
 
-    long double pq;
+    double pq;
     for(int k : daten)
     {
       pq = poisson(k, 3.11538)/poisson(k,k);
