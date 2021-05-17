@@ -53,10 +53,11 @@ int main() {
       hout << i << "  " << -2*log(prob(daten, i)) + 2*log(prob(daten, 3.11538)) << std::endl;
     }
 
-    double pq;
+    double pq = 1;
     for(int k : daten)
     {
-      pq = poisson(k, 3.11538)/poisson(k,k);
+      pq *= poisson(3.11538, k)/poisson(k,k);
     }
     std::cout << pq << std::endl;
+    std::cout << -2*log(pq) << std::endl;
 }
